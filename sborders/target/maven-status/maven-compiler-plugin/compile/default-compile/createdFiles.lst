@@ -1,0 +1,10 @@
+com\example\sborders\config\BatchConfig.class
+com\example\sborders\taskslets\TaskTwo.class
+com\example\sborders\config\BatchConfig$1.class
+com\example\sborders\entity\Order.class
+com\example\sborders\SbordersApplication.class
+com\example\sborders\controller\OrderController.class
+com\example\sborders\repository\OrderRepository.class
+com\example\sborders\service\OrderServiceImpl.class
+com\example\sborders\service\OrderService.class
+com\example\sborders\taskslets\TaskOne.class
