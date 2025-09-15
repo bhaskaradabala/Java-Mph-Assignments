@@ -1,0 +1,174 @@
+create database pa;
+use pa;
+
+CREATE TABLE employees (
+    emp_id INT PRIMARY KEY,
+    name VARCHAR(50),
+    department VARCHAR(50),
+    salary DECIMAL(10, 2)
+);
+
+INSERT INTO employees VALUES
+(1, 'Alice', 'HR', 50000),
+(2, 'Bob', 'IT', 60000),
+(3, 'Charlie', 'IT', 55000),
+(4, 'David', 'Sales', 70000),
+(5, 'Eva', 'Sales', 65000);
+
+
+CREATE TABLE departments (
+    dept_id INT PRIMARY KEY,
+    name VARCHAR(50),
+    location VARCHAR(50)
+);
+
+INSERT INTO departments VALUES
+(1, 'HR', 'New York'),
+(2, 'IT', 'San Francisco'),
+(3, 'Sales', 'Chicago');
+
+
+CREATE TABLE orders (
+    order_id INT PRIMARY KEY,
+    customer_name VARCHAR(50),
+    amount DECIMAL(10, 2),
+    order_date DATE
+);
+
+INSERT INTO orders VALUES
+(101, 'John Doe', 1200.50, '2025-08-01'),
+(102, 'Jane Smith', 800.75, '2025-08-02'),
+(103, 'Alice Brown', 500.00, '2025-08-03');
+
+DROP TABLE employees;
+DROP TABLE departments;
+DROP TABLE orders;
+
+
+
+1)
+delimiter //
+create procedure getAllEmployees()
+begin
+    select * from employees;
+end//
+delimiter ;
+
+call getAllEmployees();
+
+
+2)
+delimiter //
+create procedure getEmployeeByDept(IN dept_name varchar(50))
+begin 
+    select * from employees	
+	where department = dept_name;
+end//
+delimiter ;
+
+call getEmployeeByDept('IT');
+
+
+3)
+delimiter //
+create procedure addEmployee( in p_emp_id int, in p_name varchar(50), in p_department varchar(50), in p_salary decimal(10,2))
+begin 
+insert into employees(emp_id, name, department, salary) 
+values (p_emp_id, p_name, p_department, p_salary);
+end //
+delimiter ;
+
+call AddEmployee(6, 'Frank', 'Marketing', 72000.00);
+
+4)
+
+delimiter //
+create procedure updateSalary(IN e_emp_id INT, IN p_new_salary DECIMAL(10,2))
+begin
+    update employees
+    set salary = p_new_salary
+    where emp_id = e_emp_id;
+end//
+
+delimiter ;
+
+call updateSalary(3, 58000.00);
+
+5)
+
+delimiter //
+
+create procedure deleteEmployeeById(IN p_emp_id INT)
+begin
+    delete from employees
+    where emp_id = p_emp_id;
+end//
+
+delimiter ;
+
+call deleteEmployeeById(3);
+
+6)
+
+delimiter //
+create procedure getTotalSalaryByDept(IN dept_name VARCHAR(50))
+begin
+    select department, sum(salary) as TotalSalary
+    from employees
+    where department = dept_name
+    group by department;
+end//
+delimiter ;
+
+call getTotalSalaryByDept('Sales');
+
+7)
+
+delimiter //
+create procedure getOrdersAboveAmount(IN min_amount DECIMAL(10,2))
+begin
+    select * from orders
+    where amount > min_amount;
+end//
+delimiter ;
+
+call getOrdersAboveAmount(1000.00);
+
+8)
+
+delimiter //
+create procedure getDepartmentLocation(in dept_name VARCHAR(50))
+begin
+    select location
+    from departments
+    where name = dept_name;
+end//
+delimiter ;
+
+call getDepartmentLocation('HR');
+
+9)
+
+delimiter //
+create procedure getHighestPaidEmployee()
+begin
+	select * from employees
+	order by salary desc
+	limit 1;
+end//
+delimiter ;
+
+call getHighestPaidEmployee();
+
+10)
+
+delimiter //
+create procedure countEmployeesByDepartment()
+begin
+    select department, count(*) as EmployeeCount
+    from employees
+    group by department;
+end//
+delimiter ;
+
+call countEmployeesByDepartment();

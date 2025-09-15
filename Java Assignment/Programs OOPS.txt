@@ -1,0 +1,284 @@
+1)
+abstract class Shape{
+    public abstract double calArea();
+    
+    public void display(){
+        System.out.println("Area: "+ calArea());
+    }
+    
+}
+
+class Circle extends Shape{
+    private double radius;
+    
+    public Circle(double radius){
+        this.radius = radius;
+    }
+    
+    public double calArea(){
+        return 3.14* radius * radius;
+    }
+    
+}
+class Rectangle extends Shape{
+    private double length;
+    private double width;
+    
+    public Rectangle(double length, double width){
+        this.length = length;
+        this.width = width;
+    }
+    
+    public double calArea(){
+        return length * width;
+    }
+    
+}
+class Triangle extends Shape{
+    private double base;
+    private double height;
+    
+    public Triangle(double base, double height){
+        this.base = base;
+        this.height = height;
+    }
+    
+    public double calArea(){
+        return 0.5 * base * height;
+    }
+    
+}
+public class Main
+{
+	public static void main(String[] args) {
+		Shape circle = new Circle(5.0);
+        Shape rectangle = new Rectangle(4.0, 6.0);
+        Shape triangle = new Triangle(5.0, 3.0);
+
+        
+        circle.display();     
+        rectangle.display();  
+        triangle.display(); 
+	}
+}
+
+2)
+
+class Animal{
+    public void makeSound(){
+        System.out.println("DEFAULT - some sound");
+    }
+    
+}
+class Dog extends Animal{
+    public void makeSound(){
+        System.out.println("DOG SOUND - Bark");
+    }
+}
+class Cat extends Animal{
+    public void makeSound(){
+        System.out.println("CAT SOUND - Meow");
+    }
+}
+public class Main
+{
+	public static void main(String[] args) {
+		Animal a = new Animal();
+		Animal d = new Dog();
+		Animal c = new Cat();
+		
+		a.makeSound();
+		d.makeSound();
+		c.makeSound();
+	}
+}
+
+3)
+
+class Sport{
+    public void play(){
+        System.out.println("playing Sport");
+    }
+    
+}
+class Basketball extends Sport{
+    public void play(){
+        System.out.println("playing Basketball");
+    }
+}
+class Football extends Sport{
+    public void play(){
+        System.out.println("playing Football");
+    }
+}
+
+class Tennis extends Sport{
+    public void play(){
+        System.out.println("playing Tennis");
+    }
+}
+public class Main
+{
+	public static void main(String[] args) {
+		Sport sport = new Sport();
+		Sport basketball = new Basketball();
+		Sport football = new Football();
+		Sport tennis = new Tennis();
+		
+		sport.play();
+		basketball.play();
+		football.play();
+		tennis.play();
+		
+	}
+}
+
+3)
+class Sport{
+    public void play(){
+        System.out.println("playing Sport");
+    }
+    
+}
+class Basketball extends Sport{
+    public void play(){
+        System.out.println("playing Basketball");
+    }
+}
+class Football extends Sport{
+    public void play(){
+        System.out.println("playing Football");
+    }
+}
+
+class Tennis extends Sport{
+    public void play(){
+        System.out.println("playing Tennis");
+    }
+}
+public class Main
+{
+	public static void main(String[] args) {
+		Sport sport = new Sport();
+		Sport basketball = new Basketball();
+		Sport football = new Football();
+		Sport tennis = new Tennis();
+		
+		sport.play();
+		basketball.play();
+		football.play();
+		tennis.play();
+		
+	}
+}
+
+4)
+abstract class Vehicle{
+    abstract public void startEngine();
+    abstract public void stopEngine();
+    
+}
+
+class Car extends Vehicle{
+    public void startEngine(){
+        System.out.println("car engine started..");
+    }
+     public void stopEngine(){
+        System.out.println("car engine stopped..");
+    }
+}
+
+class MotorCycle extends Vehicle{
+    public void startEngine(){
+        System.out.println("motor cycle engine started..");
+    }
+     public void stopEngine(){
+        System.out.println("motor cycle engine stopped..");
+    }
+}
+
+public class Main
+{
+	public static void main(String[] args) {
+		Vehicle myCar = new Car();
+        Vehicle myMotorcycle = new MotorCycle();
+        
+        myCar.startEngine();
+        myCar.stopEngine();
+        myMotorcycle.startEngine();
+        myMotorcycle.stopEngine();
+        
+		
+	}
+}
+
+5)
+
+class BankAccount {
+    private String accountNumber;
+    private double balance;
+
+    public BankAccount(String accountNumber, double balance) {
+        this.accountNumber = accountNumber;
+        this.balance = balance;
+    }
+
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance = balance + amount;
+        }
+    }
+
+    public void withdraw(double amount) {
+        if (amount > 0 && balance >= amount) {
+            balance = balance - amount;
+        }
+    }
+
+    public void display() {
+        System.out.println("Account Number: " + accountNumber);
+        System.out.println("Balance: " + balance);
+    }
+}
+public class Main{
+    public static void main(String[] args) {
+        BankAccount acct = new BankAccount("123456", 1000);
+        acct.deposit(500);
+        acct.withdraw(200);
+        acct.display();
+    }
+}
+
+6)
+class Person {
+    private String name;
+    private int age;
+    private static int count = 0;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+        count++;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public static int getCount() {
+        return count;
+    }
+}
+public class Main{
+
+    public static void main(String[] args) {
+        Person p1 = new Person("Bhaskar", 22);
+        Person p2 = new Person("Surya", 25);
+        Person p3 = new Person("Prakash", 28);
+        System.out.println(Person.getCount());
+    }
+}

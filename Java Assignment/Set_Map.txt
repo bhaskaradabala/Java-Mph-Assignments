@@ -1,0 +1,179 @@
+
+
+1)
+import java.util.*;
+
+public class Main{
+    public static void main(String[] args) {
+        Set<Integer> set1 = new HashSet<>(Arrays.asList(1, 9, 13));
+        Set<Integer> set2 = new HashSet<>(Arrays.asList(13, 14, 15));
+
+        Set<Integer> union = new HashSet<>(set1);
+        union.addAll(set2);
+
+        System.out.println(union);
+    }
+}
+
+2)
+import java.util.*;
+
+public class Main{
+    public static void main(String[] args) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+
+        pq.add(18);
+        pq.add(51);
+        pq.add(2);
+
+        System.out.println("Peek: " + pq.peek());
+
+        pq.remove();
+        System.out.println("After remove: " + pq);
+    }
+}
+
+3)
+import java.util.*;
+
+public class Main{
+    public static void main(String[] args) {
+        Deque<Character> deque = new ArrayDeque<>();
+
+        deque.addFirst("A");
+        deque.addLast("B");
+        System.out.println(deque);
+
+        deque.removeFirst();
+        deque.removeLast();
+
+        System.out.println("Deque after removals: " + deque);
+    }
+}
+
+4)
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+public class Main{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String str = sc.nextLine();
+        scanner.close();
+        newstr = str.toLowerCase().replaceAll("[^a-z ]", "");
+        String[] words = newstr.split("\\s+");
+        Map<String, Integer> freqMap = new HashMap<>();
+        for (String word : words) {
+            freqMap.put(word, freqMap.getOrDefault(word, 0) + 1);
+        }
+        for (Map.Entry<String, Integer> entry : freqMap.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
+    }
+}
+
+5)
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+public class CharFrequency {
+    public static void main(String[] args) {
+        System.out.println("Enter word: ");
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+       
+        Map<Character, Integer> charCount = new HashMap<>();
+        for (char c : input.toCharArray()) {
+            charCount.put(c, charCount.getOrDefault(c, 0) + 1);
+        }
+        for (Map.Entry<Character, Integer> entry : charCount.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
+    }
+}
+
+
+6)
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class Main{
+    public static void main(String[] args) {
+        Map<String, String> phoneBook = new HashMap<>();
+        phoneBook.put("Bhaskar", "75645");
+        phoneBook.put("Surya", "67890");
+        phoneBook.put("Prakash", "54321");
+
+        for (Map.Entry<String, String> entry : phoneBook.entrySet()) {
+            System.out.println(entry.getKey() + " - " + entry.getValue());
+        }
+    }
+}
+
+7)
+
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Map<String, Integer> map = new HashMap<>();
+        map.put("Bhaskar", 50000);
+        map.put("Surya", 60000);
+        map.put("Prakash", 40000);
+
+        List<Map.Entry<String, Integer>> list = new ArrayList<>(map.entrySet());
+        list.sort(Map.Entry.comparingByValue());
+
+        for (Map.Entry<String, Integer> entry : list) {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
+    }
+}
+
+8)
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Map<String, String> original = new HashMap<>();
+        original.put("A", "1");
+        original.put("B", "2");
+        original.put("C", "3");
+
+        Map<String, String> inverted = new HashMap<>();
+        for (Map.Entry<String, String> entry : original.entrySet()) {
+            inverted.put(entry.getValue(), entry.getKey());
+        }
+
+        for (Map.Entry<String, String> entry : inverted.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
+    }
+}
+
+10)
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        List<String> list = Arrays.asList("apple", "banana", "apple", "orange", "banana", "banana");
+        Map<String, Integer> freqMap = new HashMap<>();
+
+        for (String item : list) {
+            freqMap.put(item, freqMap.getOrDefault(item, 0) + 1);
+        }
+
+        for (Map.Entry<String, Integer> entry : freqMap.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
+    }
+}
+
+
+
+

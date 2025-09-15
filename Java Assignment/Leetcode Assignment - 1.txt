@@ -1,0 +1,129 @@
+1)Reverse Integer
+
+class Solution {
+    public int reverse(int x) {
+        if(x>0){
+            return rev(x);
+        }
+        else{
+            int n = -1*x;
+            return -1* rev(n);
+        }
+        
+    }
+    public int rev(int x){
+        int n=0;
+        while(x>0){
+            
+            int r = x%10;
+            n = n*10 + r;
+            x = x/10;
+            
+        }
+        return n;
+    }
+}
+
+2)  Longest Substring Without Repeating Characters
+
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+
+        HashSet<Character> hs = new HashSet<>();
+        int maxl =0;
+        int left = 0;
+
+        for(int right =0; right < s.length(); right++){
+            char c = s.charAt(right);
+
+            while(hs.contains(c)){
+                hs.remove(s.charAt(left));
+                left++;
+
+            }
+            hs.add(c);
+            maxl = Math.max(maxl, right - left +1);
+        }
+        return maxl;        
+    }
+}
+
+3) Longest Palindromic Substring
+
+class Solution {
+    public String longestPalindrome(String s) {
+        for(i=0; i<s.length(); i++){
+            
+        }
+    }
+    public boolean pal(String str){
+        char[] c = str.toCharArray();
+        int l=0;
+        int r= str.length()-1;
+        while(l<r){
+            if(c[l]==c[r]){
+                return true;
+                l++;
+                r--;
+            }
+            else{
+                return false;
+            }
+        }
+    }
+}
+
+4)Two Sum
+
+public class Solution {
+    public int[] TwoSum(int[] nums, int target) {
+        var map = new Dictionary<int,int>();
+
+        for(int i=0; i<nums.Length; i++){
+            int c = target - nums[i];
+            if(map.ContainsKey(c)){
+                int[] res = new int[2];
+                res[0] = map[c];
+                res[1] =i;
+                return res;
+            }
+            map[nums[i]]=i;
+        }
+        return new int[0];
+    }
+}
+
+
+//O(n) - time complexity
+
+
+5)
+Median of Two Sorted Arrays
+
+class Solution {
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int n = nums1.length;
+        int m = nums2.length;
+        int l = m+n;
+
+        int[] arr = new int[l];
+
+        for(int i=0; i<n; i++){
+            arr[i] = nums1[i];
+        }
+        for(int j =0; j<m; j++){
+            arr[n+j]=nums2[j];
+        }
+
+        Arrays.sort(arr);
+
+        if(l%2!=0){
+            return arr[l/2];
+
+        }else{
+            return (arr[l/2]+arr[(l/2)-1])/2.0;
+        }
+
+
+    }
+}

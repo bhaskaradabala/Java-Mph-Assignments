@@ -1,0 +1,373 @@
+C:\Users\adabala.prakash\Downloads\mongosh-2.5.6-win32-x64\mongosh-2.5.6-win32-x64\bin>mongosh
+
+test> use mydb
+switched to db mydb     mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2
+mydb> db.users.insertMany([{"name" : "Alice", "age" :  25, "email" : "alice@example.com", "status" : "active"},
+{"name" : "bob", "age" : 30, "email": "bob@example.com", "status" : "inactive"}, 
+{ name: "Charlie", age: 22, email: "charlie@example.com" },
+{ name: "David", age: 35, ememail: "david@example.com", status: "active" }]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('68a702dc96beb7e996eec4a9'),
+    '1': ObjectId('68a702dc96beb7e996eec4aa')
+  }
+}
+
+mydb> db.users.find().pretty();
+[
+  {
+    _id: ObjectId('68a702dc96beb7e996eec4a9'),
+    name: 'Alice',
+    age: 25,
+    email: 'alice@example.com',
+    status: 'active'
+  },
+  {
+    _id: ObjectId('68a702dc96beb7e996eec4aa'),
+    name: 'bob',
+    age: 30,
+    email: 'bob@example.com',
+    status: 'inactive'
+  },
+  {
+    _id: ObjectId('68a703ab96beb7e996eec4ab'),
+    name: 'Charlie',
+    age: 22,
+mydb>
+  },
+  {
+    _id: ObjectId('68a703ab96beb7e996eec4ac'),
+    name: 'David',
+    age: 35,
+    email: 'david@example.com',
+    status: 'active'
+  }
+]
+
+1) mydb> db.users.find({ age: {$gt: 25 }}).pretty();
+[
+  {
+    _id: ObjectId('68a702dc96beb7e996eec4aa'),
+    name: 'bob',
+    age: 30,
+    email: 'bob@example.com',
+    status: 'inactive'
+  },
+  {
+    _id: ObjectId('68a703ab96beb7e996eec4ac'),
+    name: 'David',
+    age: 35,
+    email: 'david@example.com',
+    status: 'active'
+  }
+]
+
+2) mydb> db.users.find({ status: { $exists: true } }).pretty()
+[
+  {
+    _id: ObjectId('68a702dc96beb7e996eec4a9'),
+    name: 'Alice',
+    age: 25,
+    email: 'alice@example.com',
+    status: 'active'
+  },
+  {
+    _id: ObjectId('68a702dc96beb7e996eec4aa'),
+    name: 'bob',
+    age: 30,
+    email: 'bob@example.com',
+    status: 'inactive'
+  },
+  {
+    _id: ObjectId('68a703ab96beb7e996eec4ac'),
+    name: 'David',
+    age: 35,
+    email: 'david@example.com',
+    status: 'active'
+  }
+]
+
+3) mydb> db.users.updateOne(
+      { name: "Bob" },
+      { $set: { status: "active" } }
+    )
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+
+4) mydb> db.users.updateOne(
+      { name: "Alice" },
+      { $inc: { age: 1 } }
+    )
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+
+after update:
+mydb> db.users.find().pretty();
+[
+  {
+    _id: ObjectId('68a702dc96beb7e996eec4a9'),
+    name: 'Alice',
+    age: 28,
+    email: 'alice@example.com',
+    status: 'active'
+  },
+  {
+    _id: ObjectId('68a702dc96beb7e996eec4aa'),
+    name: 'bob',
+    age: 30,
+    email: 'bob@example.com',
+    status: 'inactive'
+  },
+  {
+    _id: ObjectId('68a703ab96beb7e996eec4ab'),
+    name: 'Charlie',
+    age: 22,
+    email: 'charlie@example.com'
+  },
+  {
+    _id: ObjectId('68a703ab96beb7e996eec4ac'),
+    name: 'David',
+    age: 35,
+    email: 'david@example.com',
+    status: 'active'
+  }
+]
+
+-----------------------------------------------------------------------------
+mydb> db.products.insertMany([
+...   { name: "Laptop", price: 1200, tags: ["electronics", "computer"] },
+...   { name: "Phone", price: 800, tags: ["electronics", "mobile"] },
+...   { name: "Shoes", price: 150, tags: ["fashion", "clothing"] },
+...   { name: "Watch", price: 300, tags: ["fashion", "accessory"] }
+... ]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('68a80ca396beb7e996eec4ad'),
+    '1': ObjectId('68a80ca396beb7e996eec4ae'),
+    '2': ObjectId('68a80ca396beb7e996eec4af'),
+    '3': ObjectId('68a80ca396beb7e996eec4b0')
+  }
+}
+
+mydb> db.products.find().pretty();
+[
+  {
+    _id: ObjectId('68a80ca396beb7e996eec4ad'),
+    name: 'Laptop',
+    price: 1200,
+    tags: [ 'electronics', 'computer' ]
+  },
+  {
+    _id: ObjectId('68a80ca396beb7e996eec4ae'),
+    name: 'Phone',
+    price: 800,
+    tags: [ 'electronics', 'mobile' ]
+  },
+  {
+    _id: ObjectId('68a80ca396beb7e996eec4af'),
+    name: 'Shoes',
+    price: 150,
+    tags: [ 'fashion', 'clothing' ]
+  },
+  {
+    _id: ObjectId('68a80ca396beb7e996eec4b0'),
+    name: 'Watch',
+    price: 300,
+    tags: [ 'fashion', 'accessory' ]
+  }
+]
+mydb> db.products.find({ price: { $lte: 500 } }).pretty();
+[
+  {
+    _id: ObjectId('68a80ca396beb7e996eec4af'),
+    name: 'Shoes',
+    price: 150,
+    tags: [ 'fashion', 'clothing' ]
+  },
+  {
+    _id: ObjectId('68a80ca396beb7e996eec4b0'),
+    name: 'Watch',
+    price: 300,
+    tags: [ 'fashion', 'accessory' ]
+  }
+]
+
+5)
+mydb> db.products.find({ price: { $lte: 500 } }).pretty();
+[
+  {
+    _id: ObjectId('68a80ca396beb7e996eec4af'),
+    name: 'Shoes',
+    price: 150,
+    tags: [ 'fashion', 'clothing' ]
+  },
+  {
+    _id: ObjectId('68a80ca396beb7e996eec4b0'),
+    name: 'Watch',
+    price: 300,
+    tags: [ 'fashion', 'accessory' ]
+  }
+]
+6)
+mydb> db.products.find({ tags: { $in: ["electronics"] }}).pretty();
+[
+  {
+    _id: ObjectId('68a80ca396beb7e996eec4ad'),
+    name: 'Laptop',
+    price: 1200,
+    tags: [ 'electronics', 'computer' ]
+  },
+  {
+    _id: ObjectId('68a80ca396beb7e996eec4ae'),
+    name: 'Phone',
+    price: 800,
+    tags: [ 'electronics', 'mobile' ]
+  }
+]
+
+7)
+db.products.updateMany( {}, { $set: { stock: 100 }});
+
+8)
+db.products.updateMany( {},{ $rename: { "price": "cost" }});
+
+
+
+mydb> db.products.find().pretty();
+[
+  {
+    _id: ObjectId('68a80ca396beb7e996eec4ad'),
+    name: 'Laptop',
+    tags: [ 'electronics', 'computer' ],
+    stock: 100,
+    cost: 1200
+  },
+  {
+    _id: ObjectId('68a80ca396beb7e996eec4ae'),
+    name: 'Phone',
+    tags: [ 'electronics', 'mobile' ],
+    stock: 100,
+    cost: 800
+  },
+  {
+    _id: ObjectId('68a80ca396beb7e996eec4af'),
+    name: 'Shoes',
+    tags: [ 'fashion', 'clothing' ],
+    stock: 100,
+    cost: 150
+  },
+  {
+    _id: ObjectId('68a80ca396beb7e996eec4b0'),
+    name: 'Watch',
+    tags: [ 'fashion', 'accessory' ],
+    stock: 100,
+    cost: 300
+  }
+]
+
+
+-------------------------------------------------------------------------
+
+9)
+mydb> db.orders.find({ total: { $ne: 750 } }).pretty();
+
+10)
+mydb> db.orders.updateMany({}, { $unset: { items: "" } });;
+
+11)
+mydb> db.orders.updateMany({}, { $mul: { total: 1.1 } });
+
+12)
+mydb> db.orders.find({ date: { $gt: "2025-08-05" } }).pretty();
+
+
+-----------------------------------------------------------------------------------
+mydb> db.students.insertMany([
+...   { "name": "Eva", "grades": [85, 90, 78] },
+...   { "name": "Frank", "grades": [60, 75, 80] },
+...   { "name": "Grace", "grades": [95, 100, 98] }
+... ]
+... );
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('68a83cec96beb7e996eec4b4'),
+    '1': ObjectId('68a83cec96beb7e996eec4b5'),
+    '2': ObjectId('68a83cec96beb7e996eec4b6')
+  }
+}
+
+mydb> db.students.find().pretty();
+[
+  {
+    _id: ObjectId('68a83cec96beb7e996eec4b4'),
+    name: 'Eva',
+    grades: [ 85, 90, 78 ]
+  },
+  {
+    _id: ObjectId('68a83cec96beb7e996eec4b5'),
+    name: 'Frank',
+    grades: [ 60, 75, 80 ]
+  },
+  {
+    _id: ObjectId('68a83cec96beb7e996eec4b6'),
+    name: 'Grace',
+    grades: [ 95, 100, 98 ]
+  }
+]
+
+
+13)
+mydb> db.students.find({grades : {$in:[100]}}).pretty();
+[
+  {
+    _id: ObjectId('68a83cec96beb7e996eec4b6'),
+    name: 'Grace',
+    grades: [ 95, 100, 98 ]
+  }
+]
+
+14)
+mydb> db.students.updateOne({ name: "Eva" }, {$addToSet: {grades:88}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+
+15)
+mydb> db.students.updateOne({name: "Frank" }, {$pop:  {grades:1}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+
+16)
+mydb> db.students.find({ grades: {$elemMatch: {$gt: 90}}}, {name:1, grades:1}).pretty();
+[
+  {
+    _id: ObjectId('68a83cec96beb7e996eec4b6'),
+    name: 'Grace',
+    grades: [ 95, 100, 98 ]
+  }
+]
+
+
+

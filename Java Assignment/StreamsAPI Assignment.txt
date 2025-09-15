@@ -1,0 +1,346 @@
+1)
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class StreamsAssignment {
+	public static void main(String args[]) {
+		
+		List<String> list = Arrays.asList("banana", "apple", "mango");
+		List<String> sorted = list.stream().sorted().collect(Collectors.toList());
+		
+		System.out.println(sorted);
+		
+	}
+}
+
+2)
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class StreamsAssignment {
+	public static void main(String args[]) {
+		
+		List<String> list = Arrays.asList("cat", "tiger", "lion", "crocodile");
+		long count = list.stream().filter(s -> s.length() > 4).count();
+		
+		System.out.println(count);
+		
+	}
+}
+
+3)
+package streams;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+
+class Employee{
+	private String name;
+	private String department;
+	
+	public Employee() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Employee(String name, String department) {
+		super();
+		this.name = name;
+		this.department = department;
+	}
+	
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(String department) {
+		this.department = department;
+	}
+	
+	@Override
+	public String toString() {
+		return "Employee [name=" + name + ", department=" + department + "]";
+	}
+}
+public class StreamsAssignment {
+	public static void main(String args[]) {
+		 List<Employee> employees = Arrays.asList(
+		            new Employee("John", "IT"),
+		            new Employee("Alice", "HR"),
+		            new Employee("Bob", "IT")
+		        );
+		
+		 Map<String, List<String>> group = employees.stream()
+				 .collect(Collectors.groupingBy(Employee::getDepartment,Collectors.mapping(Employee::getName, Collectors.toList())));
+		 
+		 
+		 System.out.println(group);
+		 
+
+		
+	}
+}
+
+
+4)
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+
+class Employee{
+	private String name;
+	private double salary;
+	public Employee() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Employee(String name, double salary) {
+		super();
+		this.name = name;
+		this.salary = salary;
+	}
+
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public double getSalary() {
+		return salary;
+	}
+	public void setSalary(double salary) {
+		this.salary = salary;
+	}
+	@Override
+	public String toString() {
+		return "Employee [name=" + name + ", salary=" + salary + "]";
+	}
+	
+}
+public class StreamsAssignment {
+	public static void main(String args[]) {
+		List<Employee> employee = Arrays.asList(new Employee("John", 50000), new Employee("Alice", 60000));
+		
+		double avg = employee.stream().mapToDouble(Employee :: getSalary).average().orElse(0.0);
+		
+		System.out.println(avg);	
+	}
+}
+
+5)
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class StreamsPractice {
+    public static void main(String[] args) {
+        List<String> languages = Arrays.asList("Java", "Python", "C++");
+        String result = languages.stream()
+                                 .collect(Collectors.joining(","));
+        System.out.println(result); 
+    }
+}
+
+6)
+package streams;
+
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+
+class Employee {
+    private String name;
+    private double salary;
+
+    public Employee(String name, double salary) {
+        this.name = name;
+        this.salary = salary;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+}
+
+public class StreamsAssignment {
+    public static void main(String[] args) {
+        List<Employee> employees = Arrays.asList(
+            new Employee("John", 70000),
+            new Employee("Alice", 95000)
+        );
+
+        Employee highest = employees.stream()
+                                       .max(Comparator.comparingDouble(Employee::getSalary))
+                                       .orElseThrow(() -> new IllegalArgumentException("No employees found"));
+
+        System.out.println(highest.getName()); 
+    }
+}
+
+7)
+
+package streams;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+public class StreamsAssignment {
+    public static void main(String[] args) {
+        List<String> names = Arrays.asList("Tom", "Elizabeth", "Sam");
+        Map<String, Integer> nameLengths = names.stream()
+                                                .collect(Collectors.toMap(name -> name, String::length));
+        System.out.println(nameLengths);
+    }
+}
+
+
+8)
+package streams;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class StreamsAssignment {
+    public static void main(String[] args) {
+        List<String> languages = Arrays.asList("java", "python");
+        List<String> uppercase = languages.stream()
+                                                   .map(String::toUpperCase)
+                                                   .collect(Collectors.toList());
+        System.out.println(uppercase); 
+    }
+}
+
+
+9)
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class FirstThreeNumbers {
+    public static void main(String[] args) {
+        List<Integer> numbers = Arrays.asList(40, 15, 25, 20, 35, 7);
+        List<Integer> firstThree = numbers.stream().limit(3).collect(Collectors.toList());
+        System.out.println(firstThree); 
+    }
+}
+
+10)
+package streams;
+
+import java.util.Arrays;
+import java.util.List;
+
+public class StreamsAssignment {
+    public static void main(String[] args) {
+        List<Integer> numbers = Arrays.asList(40, 15, 25, 20, 35, 7);
+        int product = numbers.stream().reduce(1, (a, b) -> a * b);
+        
+        System.out.println(product); 
+    }
+}
+
+11)
+package streams;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+public class StreamsAssignment {
+    public static void main(String[] args) {
+        String sentence = "Java is great. JAVA is powerful.";
+        Map<String, Long> wordCount = Arrays.stream(sentence.split("\\W+")).map(String::toLowerCase)
+                                            .collect(Collectors.groupingBy(word -> word, Collectors.counting()));
+        
+        System.out.println(wordCount); 
+    }
+}
+
+12)
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class StreamsAssignment {
+    public static void main(String[] args) {
+        List<String> names = Arrays.asList("Alice", "Bob", "Andrew", "Tom");
+        List<String> filtering = names.stream()
+                                          .filter(name -> name.startsWith("A"))
+                                          .collect(Collectors.toList());
+        System.out.println(filtering); 
+    }
+}
+
+13)
+import java.util.Arrays;
+import java.util.List;
+
+public class StreamsAssignment {
+    public static void main(String[] args) {
+        List<String> words = Arrays.asList("cat", "elephant", "dog");
+        String longest = words.stream()
+                              .reduce((a, b) -> a.length() > b.length() ? a : b)
+                              .orElse("No words");
+        System.out.println(longest); 
+    }
+}
+
+14)
+package streams;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+public class StreamsAssignment {
+    public static void main(String[] args) {
+    	
+    	String sentence = "apple banana apple orange banana apple";
+        
+        Map<String, Long> wordCount = Arrays.stream(sentence.split("\\s+")).map(String::toLowerCase)
+                                            .collect(Collectors.groupingBy(word -> word, Collectors.counting()));
+        
+        System.out.println(wordCount); 
+    }
+}
+
+
+15)
+package streams;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class StreamsAssignment {
+    public static void main(String[] args) {
+        List<String> names = Arrays.asList("john", "alice", "mark");
+        String result = names.stream().map(String::toUpperCase)
+        		.collect(Collectors.joining(" - "));
+        
+        System.out.println(result); 
+    }
+}

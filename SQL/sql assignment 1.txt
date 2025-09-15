@@ -1,0 +1,215 @@
+1)
+CREATE DATABASE SchoolDB;
+USE SchoolDB;
+
+2)
+CREATE TABLE Students (
+    StudentID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Age INT,
+    Grade VARCHAR(2)
+);
+
+
+3)
+INSERT INTO Students (StudentID, Name, Age, Grade)
+VALUES
+    (1, 'Arjun', 14, 'B'),
+    (2, 'Bob', 16, 'A'),
+    (3, 'Charan', 17, 'C'),
+    (4, 'Dinakar', 15, 'B'),
+    (5, 'Surya', 18, 'A');
+
+4)
+SELECT * FROM Students WHERE Age > 15;
+
+5)
+UPDATE Students SET Grade = 'A' WHERE StudentID = 3;
+
+
+6)
+DELETE FROM Students WHERE StudentID = 5;
+
+7)
+CREATE TABLE Courses (
+    CourseID INT PRIMARY KEY,
+    CourseName VARCHAR(100),
+    Instructor VARCHAR(100)
+);
+
+8)
+INSERT INTO Courses (CourseID, CourseName, Instructor)
+VALUES
+    (1, 'Mathematics', 'Smith'),
+    (2, 'Science', 'Johnson'),
+    (3, 'History', 'Lee');
+
+9)
+CREATE TABLE Enrollments (
+    EnrollmentID INT PRIMARY KEY,
+    StudentID INT,
+    CourseID INT,
+    FOREIGN KEY (StudentID) REFERENCES Students(StudentID),
+    FOREIGN KEY (CourseID) REFERENCES Courses(CourseID)
+);
+
+10)
+SELECT s.Name
+FROM Students s
+JOIN Enrollments e ON s.StudentID = e.StudentID
+JOIN Courses c ON e.CourseID = c.CourseID
+WHERE c.CourseName = 'Mathematics';
+
+11)
+SELECT c.CourseName, COUNT(e.StudentID) AS StudentCount
+FROM Courses c
+LEFT JOIN Enrollments e ON c.CourseID = e.CourseID
+GROUP BY c.CourseName;
+
+12)
+SELECT s.Name, c.CourseName
+FROM Students s
+JOIN Enrollments e ON s.StudentID = e.StudentID
+JOIN Courses c ON e.CourseID = c.CourseID;
+
+13)
+SELECT s.Name
+FROM Students s
+LEFT JOIN Enrollments e ON s.StudentID = e.StudentID
+WHERE e.EnrollmentID IS NULL;
+
+14)
+ALTER TABLE Students ADD Email VARCHAR(100);
+
+15)
+SELECT Grade, AVG(Age) AS AverageAge
+FROM Students
+GROUP BY Grade;
+
+16)
+SELECT * FROM Students order by name desc;
+
+17)
+CREATE VIEW studentcourseview as
+SELECT s.name as studentname, c.coursename, c.instructor
+FROM students s
+JOIN enrollments e on s.studentId = e.studentId
+JOIN courses c on e.CourseId = c.courseId;
+
+18)
+SELECT c.CourseName
+FROM Courses AS c
+LEFT JOIN Enrollments AS e ON c.CourseID = e.CourseID
+WHERE e.EnrollmentID IS NULL;
+
+
+19)
+CREATE INDEX student_name
+ON Students (Name);
+
+20)
+SELECT *
+FROM Students
+ORDER BY Age ASC
+LIMIT 3;
+
+21)
+delimiter $$
+create procedure insert_student(
+    in p_student_id int,
+    in p_student_name varchar(100),
+    in p_major varchar(100),
+    in p_email varchar(100))
+begin
+    insert into students (student_id, student_name, major, email)
+    values (p_student_id, p_student_name, p_major, p_email);
+end $$
+delimiter ;
+
+
+
+22)
+create trigger update_student_lastupdated
+before update on students
+for each row
+begin
+    set new.lastupdated = current_timestamp;
+end;
+
+
+
+
+23)
+CREATE TABLE Departments (
+  DepartmentID INT PRIMARY KEY,
+  DepartmentName VARCHAR(100) NOT NULL
+);
+
+
+24)
+SELECT c.*
+FROM Courses c
+JOIN Departments d
+  ON c.DepartmentID = d.DepartmentID
+WHERE d.DepartmentName = 'Science';
+
+
+25)
+select c.courseid, c.coursename
+from courses c
+inner join departments d on c.departmentid = d.departmentid
+where d.departmentname = 'science';
+
+26)
+select d.departmentname, count(*) as num_courses
+from courses c
+inner join departments d on c.departmentid = d.departmentid
+group by d.departmentname;
+
+
+27)
+
+create table students (
+    studentid int primary key,
+    studentname varchar(100),
+    dob date,
+    email varchar(100)
+);
+
+create table courses (
+    courseid int primary key,
+    coursename varchar(100),
+    departmentid int
+);
+
+create table enrollments (
+    enrollmentid int primary key,
+    studentid int,
+    courseid int,
+    enrollmentdate date,
+    foreign key (studentid) references students(studentid),
+    foreign key (courseid) references courses(courseid)
+);
+
+28)
+select s.studentname
+from students s
+inner join enrollments e on s.studentid = e.studentid
+group by s.studentid
+having count(e.courseid) > 2;
+
+29)
+select c.coursename
+from courses c
+inner join enrollments e on c.courseid = e.courseid
+group by c.courseid
+having count(e.studentid) > 5;
+
+30)
+delete from students
+where studentid not in (
+    select distinct studentid
+    from enrollments
+);
+
+

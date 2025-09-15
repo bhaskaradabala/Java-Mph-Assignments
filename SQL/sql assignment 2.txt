@@ -1,0 +1,231 @@
+1)
+create database CompanyDB
+use CompanyDB;
+
+2)
+create table Employees(
+   empId int Primary key,
+   firstname varchar(50),
+   lastname varchar(50),
+   dob date,
+   salary decimal(10,2));
+
+3)
+insert into Employees (empId, firstname, lastname, dob, salary) values
+(1, 'bhaskar', 'Adabala', '1985-12-06', 55000),
+(2, 'Surya', 'P', '1990-07-20', 62000),
+(3, 'Bhargav', 'Ram', '1982-03-25', 48000),
+(4, 'Sriram', 'Byr', '1978-11-30', 75000),
+(5, 'Ravi', 'Ravulas', '1995-02-10', 60000),
+(6, 'David', 'Josam', '1988-09-05', 53000),
+(7, 'Dinakar', 'Ram', '1992-01-17', 47000),
+(8, 'Rakesh', 'Mallireddy', '1980-06-22', 80000),
+(9, 'Pavan', 'Kumar', '1987-12-09', 52000),
+(10, 'Mahesh', 'Naidu', '1993-04-14', 46000);
+
+4) 
+select * from employees;
+
+5)
+select * from employees 
+where salary >50000;
+
+6)
+update employees set salary = 60000 where empId = 5;
+
+7)
+delete from employees where empId = 10;
+
+8)
+alter table employees add department varchar(50);
+
+9)
+alter table employees change column department deptname varchar(50);
+
+10)
+select * from employees order by lastname asc;
+
+--------------------------------------------------------------
+
+11)
+select distinct deptname from employees;
+
+12)
+select avg(salary) as averagesalary from employees;
+
+13)
+select deptname, count(*) as employeecount
+from employees
+group by deptname;
+
+14)
+select * from employees
+where lastname like 's%';
+
+15)
+select * from employees
+where dob between '1980-01-01' AND '1990-12-31';
+
+16)
+select * from employees
+where salary between 40000 AND 60000;
+
+17)
+select * from employees
+order by salary desc
+limit 5;
+
+18)
+select * from employees
+where firstname LIKE '%an%';
+
+19)
+select * from employees
+where salary is not null;
+
+20)
+select concat(FirstName, ' ', LastName) AS FullName FROM Employees;
+
+-------------------------------------------------------------------
+21)
+create table departments (
+    deptid int primary key,
+    deptname varchar(100)
+);
+
+22)
+alter table employees
+add constraint fk_deptid
+foreign key (deptid) references departments(deptid);
+
+
+23)
+insert into departments (deptid, deptname) values
+(1, 'hr'),
+(2, 'finance'),
+(3, 'engineering'),
+(4, 'marketing');
+
+24)
+select e.empid, e.firstname, e.lastname, e.salary, d.deptname
+from employees e
+inner join departments d on e.deptid = d.deptid;
+
+25)
+
+select d.deptname
+from departments d
+left join employees e on d.deptid = e.deptid
+where e.empid is null;
+
+26)
+select e.empid, e.firstname, e.lastname
+from employees e
+inner join departments d on e.deptid = d.deptid
+where d.deptname = 'finance';
+
+27)
+select e1.empid as employee_id, e1.firstname as employee_name, e2.empid as manager_id, e2.firstname as manager_name
+from employees e1
+left join employees e2
+on e1.managerid = e2.empid;
+
+28)
+create table projects (
+    projectid int primary key,
+    projectname varchar(100),
+    deptid int,
+    foreign key (deptid) references departments(deptid)
+);
+
+29)
+create table employee_projects (
+    empid int,
+    projectid int,
+    primary key (empid, projectid),
+    foreign key (empid) references employees(empid),
+    foreign key (projectid) references projects(projectid)
+);
+
+30)
+select p.projectname, e.firstname, e.lastname
+from projects p
+inner join employee_projects ep on p.projectid = ep.projectid
+inner join employees e on ep.empid = e.empid;
+
+-----------------------------------------------------------------
+
+31)
+select d.deptname, sum(e.salary) as total_salary
+from employees e
+inner join departments d on e.deptid = d.deptid
+group by d.deptname;
+
+32)
+select d.deptname
+from employees e
+inner join departments d on e.deptid = d.deptid
+group by d.deptname
+order by avg(e.salary) desc
+limit 1;
+
+33)
+select
+    case
+        when year(current_date) - year(e.dob) < 30 then '<30'
+        when year(current_date) - year(e.dob) between 30 and 40 then '30-40'
+        else '>40'
+    end as age_bracket,
+    count(*) as employee_count
+from employees e
+group by age_bracket;
+
+34)
+select d.deptname, count(*) as employee_count
+from employees e
+inner join departments d on e.deptid = d.deptid
+group by d.deptname
+having count(*) > 3;
+
+
+35)
+select d.deptname, min(e.salary) as min_salary, max(e.salary) as max_salary
+from employees e
+inner join departments d on e.deptid = d.deptid
+group by d.deptname;
+
+
+36)
+select d.deptname, count(*) as employee_count
+from employees e
+inner join departments d on e.deptid = d.deptid
+group by d.deptname
+order by employee_count desc;
+
+
+37)
+select max(e.salary) as second_highest_salary
+from employees e
+where e.salary < (select max(salary) from employees);
+
+38)
+select d.deptname
+from employees e
+inner join departments d on e.deptid = d.deptid
+group by d.deptname
+having avg(e.salary) < 50000;
+
+
+39)
+select d.deptname, count(*) as employee_count
+from employees e
+inner join departments d on e.deptid = d.deptid
+group by d.deptname
+having count(*) > 5;
+
+
+40)select count(*) as employees_without_dept
+from employees
+where deptid is null;
+
+

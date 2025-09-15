@@ -1,0 +1,264 @@
+11)
+
+import java.util.*;
+
+public class Main{
+    public static void main(String[] args) {
+        Set<String> names = new HashSet<>();
+        names.add("Ajay");
+        names.add("Bob");
+        names.add("Charan");
+        names.add("Dravid");
+        names.add("Ajay");
+        names.add("Frank");
+        names.add("Bob");
+        System.out.println(names);
+    }
+}
+
+12)
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        List<String> fruits = new ArrayList<>();
+        fruits.add("Apple");
+        fruits.add("Banana");
+        fruits.add("Cherry");
+        fruits.add("Banana");
+        fruits.add("Cherry");
+        System.out.println(fruits);
+        Set<String> set = new HashSet<>(fruits);
+        System.out.println(set);
+    }
+}
+
+13)
+
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+    
+        Set<String> set1 = new HashSet<>();
+        set1.add("Apple");
+        set1.add("Banana");
+        set1.add("Orange");
+        set1.add("Cherry");
+        Set<String> set2 = new HashSet<>();
+        set2.add("Cherry");
+        set2.add("Apple");
+        set2.add("Banana");
+        set2.add("Orange");
+        
+        System.out.println(set1.equals(set2));
+    }
+}
+
+14)
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+    
+        Set<String> set1 = new HashSet<>();
+        set1.add("Apple");
+        set1.add("Banana");
+        set1.add("Orange");
+        set1.add("Cherry");
+        Set<String> set2 = new HashSet<>();
+        set2.add("Cherry");
+        set2.add("Apple");
+        set2.add("Banana");
+        set2.add("Pineapple");
+        set2.add("Watermelon");
+        set1.retainAll(set2);
+        System.out.println(set1);
+    }
+}
+
+15)
+
+
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+    
+        Set<String> set1 = new HashSet<>();
+        set1.add("Apple");
+        set1.add("Banana");
+        set1.add("Orange");
+        set1.add("Cherry");
+        set1.add("Kiwi");
+        set1.add("Grapes");
+        Set<String> set2 = new HashSet<>();
+        set2.add("Cherry");
+        set2.add("Apple");
+        set2.add("Banana");
+        set2.add("Pineapple");
+        set2.add("Watermelon");
+        
+        Set<String> union = new HashSet<>(set1);
+        union.addAll(set2);
+        System.out.println("Union: " + union); 
+
+        Set<String> difference = new HashSet<>(set1);
+        difference.removeAll(set2);
+        System.out.println("Difference: " + difference); 
+
+        Set<String> symmetricDifference = new HashSet<>(set1);
+        symmetricDifference.addAll(set2);
+        Set<String> intersection = new HashSet<>(set1);
+        intersection.retainAll(set2);
+        symmetricDifference.removeAll(intersection);
+        System.out.println("Symmetric Difference: " + symmetricDifference);
+        
+    }
+}
+
+16)
+
+
+import java.util.*;
+
+class Book {
+    int id;
+    String title;
+
+    Book(int id, String title) {
+        this.id = id;
+        this.title = title;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj){
+             return true;
+        }
+        if (obj == null || getClass() != obj.getClass()){
+            return false;
+        } 
+        Book book = (Book) obj;
+        return id == book.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return title;
+    }
+}
+
+
+public class Main {
+    public static void main(String[] args) {
+    
+         Set<Book> books = new HashSet<>();
+        books.add(new Book(1, "Java Basics"));
+        books.add(new Book(2, "Advanced Java"));
+        books.add(new Book(1, "Java Basics"));
+
+        System.out.println("Books in the set: " + books);
+    }
+        
+    
+}
+
+17)
+
+import java.util.*;
+public class Main {
+    public static void main(String[] args) {
+    
+        Set<String> set1 = new HashSet<>();
+        set1.add("Apple");
+        set1.add("Banana");
+        set1.add("Cherry");
+        Set<String> set2 = new HashSet<>();
+        set2.add("Cherry");
+        set2.add("Apple");
+        set2.add("Banana");
+    
+        System.out.println(set1.containsAll(set2));
+        
+    }
+}
+
+18)
+
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+    
+        List<String> list = Arrays.asList("Apple", "Banana", "Apple", "Cherry");
+        Set<String> listToSet= new HashSet<>(list);
+        System.out.println("Set from List: " + listToSet);
+
+        
+        List<String> setToList = new ArrayList<>(listToSet);
+        System.out.println("List from Set (constructor): " + setToList);
+        
+    }
+}
+
+19)
+
+import java.util.HashSet;
+import java.util.Scanner;
+import java.util.Set;
+
+public class Main{
+    public static void main(String[] args) {
+        Set<String> fruits = new HashSet<>();
+        fruits.add("Apple");
+        fruits.add("Banana");
+        fruits.add("Cherry");
+        fruits.add("Date");
+        fruits.add("Cherry");
+        fruits.add("Date");
+        System.out.println("Current set: " + fruits);
+
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter an item to remove: ");
+        String r = sc.nextLine();
+
+        boolean b = fruits.remove(r);
+        if (b) {
+            System.out.println(r + " was removed");
+        } else {
+            System.out.println(r + " not found in the set");
+        }
+
+        System.out.println("Updated set: " + fruits);
+        sc.close();
+    }
+}
+
+20)
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+public class Main {
+    public static void main(String[] args) {
+        List<String> fruits = new ArrayList<>();
+        Collections.addAll(fruits, "apple", "banana", "apple", "cherry", "banana", "apple");
+
+        Set<String> set = new HashSet<>(fruits);
+
+        System.out.println("frequencies:");
+        for (String fruit : set) {
+            int freq = Collections.frequency(set, fruit);
+            System.out.println(fruit + ": " + freq);
+        }
+    }
+}

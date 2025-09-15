@@ -1,0 +1,265 @@
+1)
+import java.util.Scanner;
+public class Main
+{
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int a = sc.nextInt();
+		int b = sc.nextInt();
+		
+		int temp = a;
+		a = b;
+		b=temp;
+		
+		System.out.println(a);
+		System.out.println(b);
+	}
+}
+
+2)
+
+public class Main
+{
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+                System.out.print("Enter 1st float number: );
+                float a = sc.nextFloat();
+                System.out.print("Enter 2nd float number: );
+                float b = sc.nextFloat();
+		System.out.print(multiply(a,b));
+		
+	}
+        public static float multiply(float a, float b){
+                return a*b;
+        }
+
+}
+3)
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+	    Scanner sc = new Scanner(System.in);
+	    int a = sc.nextInt();
+	    
+	    if(a%2 == 0){
+	        System.out.println("EVEN");
+	    }
+	    else{
+	        System.out.println("ODD");
+	    }
+		
+		
+	}
+}
+
+4)
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Radius: ");
+	    int r = sc.nextInt();
+	    double area = 3.14 * r * r;
+	    
+	    System.out.println(area);
+		
+		
+	}
+}
+5)
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Number: ");
+	    int a = sc.nextInt();
+	    if(a>0){
+	        System.out.println("Positive");
+	    }
+	    else if(a==0){
+	        System.out.println("Zero");
+	    }
+	    else{
+	        System.out.println("Negative");
+	    }
+		
+		
+	}
+}
+6)
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+	    Scanner sc = new Scanner(System.in);
+	    System.out.print("Number: ");
+	    int n = sc.nextInt();
+	    int factorial = 1;
+	    while(n>0){
+	        factorial = factorial*n;
+	        n--;
+	    }
+	    System.out.println(factorial);
+		
+		
+	}
+}
+7)
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Numbers: ");
+	    int a = sc.nextInt();
+	    int b = sc.nextInt();
+	    int c = sc.nextInt();
+	    int max;
+	    
+	    if(a>b && a>c){
+	        max =a;
+	        
+	    }
+	    else if(b>a && b>c){
+	        max =b;
+	    }
+	    else{
+	        max =c;
+	    }
+	    
+	    System.out.println(max);
+	    
+		
+		
+	}
+}
+
+8)
+
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+	    Scanner sc = new Scanner(System.in);
+            System.out.print("Number: ");
+	    int num = sc.nextInt();
+	    int sum =0;
+
+	    while(num!=0){
+	       int r =num%10;
+	       sum = sum + r;
+	       num = num/10;
+	    }
+	    
+	    
+	    
+	    System.out.println(sum);
+	    
+		
+		
+	}
+}
+
+9)
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+	    Scanner sc = new Scanner(System.in);  
+            System.out.print("Number: ");
+	    int num = sc.nextInt();
+	    if(num ==0 || num==1){
+	        System.out.println("NOT PRIME");
+                
+	    }
+	    else{
+	        boolean b = true;
+	        for(int i=2; i<num/2; i++){
+	        if(num%i ==0){
+	            b= false;
+	            break;
+	        }
+	        
+	    }
+	    if(b){
+	        System.out.println("PRIME");
+	    }
+	    else{
+	        System.out.println("NOT PRIME");
+	    }
+	    }
+	    
+	    
+	    
+		
+		
+	}
+}
+10)
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+	    Scanner sc = new Scanner(System.in);
+	    System.out.print("Number: ");
+	    int num = sc.nextInt();
+	    
+	    for(int i=0; i<num; i++){
+	        System.out.print(fab(i)+" ");
+	    }
+	}
+	
+	public static int fab(int n){
+	    if(n==0 || n==1){
+	        return n;
+	    }
+	    else{
+	        return fab(n-1)+fab(n-2);
+	    }
+	}
+	   
+}
+
+11)
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Number: ");
+	    int num = sc.nextInt();
+	    System.out.println(rev(num));
+	    
+	}
+	
+	public static int rev(int n){
+	    int rev =0;
+	    while(n!=0){
+	        
+	        int r = n % 10;
+	        rev = r + rev *10;
+	        n=n/10;
+	        
+	    }
+	    
+	    return rev;
+	}
+
+}
+
+12)
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Celsius: ");
+	    int c = sc.nextInt();
+	    double f = (double)((c * 9/5) + 32);
+	    System.out.println(f);
+	}
+
+}
